@@ -1,0 +1,20 @@
+[user]
+	email = chenhuiz@axis.com
+	name = Hermes Zhang
+[alias]
+	br = branch
+	co = checkout
+	ci = commit
+	st = status
+        cp = cherry-pick
+        lg = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short --all
+        lgonly = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
+[color]
+	ui = true
+[core]
+	editor = vim
+[branch]
+        autosetuprebase = always
+
+[http]
+        proxy = http://wwwproxy/auto
