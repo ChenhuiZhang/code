@@ -7,14 +7,39 @@
 	ci = commit
 	st = status
         cp = cherry-pick
+        fp = format-patch
         lg = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short --all
         lgonly = log --graph --pretty=format:'%C(red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=short
+	push-pre-branch = "!f() { b=$(sed -nre \"s#ref: refs/heads/(pre-)?(master$|special/|rel/|int/|dev/|topic/|fix/)#\\1\\2#p\" .git/HEAD 2>/dev/null) && [ \"$b\" ] && git push \"$@\" origin $b:pre-${b#pre-} || echo \"Not currently on a valid branch!\" >&2; }; f"
 [color]
-	ui = true
+	ui = auto
 [core]
 	editor = vim
+	attributesfile = /usr/share/atools/gitattributes
+	gitproxy = socks-gw for anongit.freedesktop.org
+	gitproxy = socks-gw for git.kernel.org
+	gitproxy = socks-gw for github.com
+	gitproxy = socks-gw for git.yoctoproject.org
+	gitproxy = socks-gw for git.openembedded.org
+	gitproxy = socks-gw for git.infradead.org
 [branch]
         autosetuprebase = always
 
 [http]
-        proxy = http://wwwproxy/auto
+    proxy = http://proxycluster.se.axis.com:3128
+
+[merge]
+	log = true
+[diff "odf"]
+	textconv = odt2txt
+[push]
+	default = tracking
+[init]
+	templatedir = /usr/share/ahooks/templates
+[axis "hooks"]
+	directory = /usr/share/ahooks/hooks.d
+	workingdirHooks = true
+[reviewboard]
+	url = https://review.se.axis.com/
+[include]
+	path = /home/chenhuiz/.local/etc/axis_gittools/local.gitconfig
