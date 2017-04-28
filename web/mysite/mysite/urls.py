@@ -18,10 +18,12 @@ from django.contrib import admin
 from mysite.view import hello
 from mysite.view import time
 from mysite.view import search
+from mysite.view import device
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^hello/', hello),
     url(r'^time/', time),
     url(r'^search/', search),
+    url(r'^device/', device),
 ]

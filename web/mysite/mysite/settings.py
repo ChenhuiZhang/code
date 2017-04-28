@@ -25,7 +25,9 @@ SECRET_KEY = 'u5v(lbyf25sxg5^(dt%p&$un$306m!&$r0-b)2d$dwha!2d%iq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+        u'192.168.77.17',
+        ]
 
 
 # Application definition
@@ -58,6 +60,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             '/home/chenhuiz/web/mysite/templates',
+            '/home/chenhuiz/codequit/web/mysite/templates',
             ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,3 +125,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]

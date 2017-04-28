@@ -1,0 +1,62 @@
+{% load static %}
+<head>
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fontawesome/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'jquery-ui.css' %}">
+	<link rel="stylesheet" href="{% static 'table.css' %}">
+</head>
+<body>
+	<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'underscore.js' %}"></script>
+	<script src="{% static 'jquery-ui.min.js' %}"></script>
+
+	<div class="page-header">
+		<h2>IP Camera</h2>
+	</div>
+	<div>
+	</div>
+	<div class="container">
+		<div id="table" class="table-editable">
+   			<span class="table-add glyphicon glyphicon-plus"></span>
+    		<table class="table">
+      			<tr>
+        			<th>Name</th>
+        			<th>Value</th>
+        			<th></th>
+        			<th></th>
+      			</tr>
+				{% for name, value in bb_list %}
+      			<tr>
+				<td contenteditable="true">{{ name }}</td>
+				<td contenteditable="true">{{ value }}</td>
+        			<td>
+          				<span class="table-remove glyphicon glyphicon-remove"></span>
+        			</td>
+        			<td>
+          				<span class="table-up glyphicon glyphicon-arrow-up"></span>
+          				<span class="table-down glyphicon glyphicon-arrow-down"></span>
+        			</td>
+      			</tr>
+				{% endfor %}
+      			<!-- This is our clonable table line -->
+      			<tr class="hide">
+        			<td contenteditable="true">Untitled</td>
+        			<td contenteditable="true">undefined</td>
+        			<td>
+          				<span class="table-remove glyphicon glyphicon-remove"></span>
+        			</td>
+        			<td>
+          				<span class="table-up glyphicon glyphicon-arrow-up"></span>
+          				<span class="table-down glyphicon glyphicon-arrow-down"></span>
+        			</td>
+      			</tr>
+    		</table>
+  		</div>
+  
+  		<button id="export-btn" class="btn btn-primary">Export Data</button>
+		<button id="save-btn" class="btn btn-primary">Save Data {% csrf_token %}</button>
+  		<p id="export"></p>
+	</div>
+	<script src="{% static 'script.js' %}"></script>
+</body>

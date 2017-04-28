@@ -23,8 +23,8 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for item in item_list %}
-					<tr><td><a href="fs">{{ item }}</a></td></tr>
+				{% for ip, model in item_list %}
+					<tr><td><a href="../device/?ip={{ ip }}" onclick="return devOpen()">{{ ip }}</a></td><td>{{ model }}</td></tr>
 				{% endfor %}
 			</tbody>
 		</table>
