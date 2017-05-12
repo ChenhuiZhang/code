@@ -1,0 +1,41 @@
+{% load static %}
+<head>
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'fontawesome/css/font-awesome.min.css' %}">
+	<script type="text/javascript">
+		function onRefresh(){
+			alert("Click button");
+		}
+	</script>
+</head>
+<body>
+	<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+
+	<div class="page-header">
+		<h2 style="color:#00BFFF; font-family: Georgia">Hello, mbb means Modify the BootBlock parameters in Axis Camera. </h2>
+		<h4 style="font-style:italic"> --- This require the Axis cameras's chip higher than artpec-5!</h4>
+	</div>
+	<div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>List</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for ip, model, mac in item_list %}
+				<tr><td><a href="/device/?ip={{ ip }}" onclick="return devOpen()">{{ ip }}</a></td><td>{{ model }}</td><td>{{ mac }}</td></tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<p>
+	<button type="button" class="btn btn-lg btn-primary" onclick="onRefresh()">Refresh</button>
+	<button type="submit" formaction="/admin" class="btn">Refresh 2</button>
+	<button type="button" class="btn btn-lg btn-primary" onclick="onNext()">Next</button>
+	<form action="/search/" method="get">
+		<input type="submit" value="Search">
+	</form>
+	</p>
+</body>
