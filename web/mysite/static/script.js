@@ -51,6 +51,7 @@ $BTN.click(function () {
   
   // Output the result
   $EXPORT.text(JSON.stringify(data));
+  $('input[name="new_bb"]').val(JSON.stringify(data));
 });
 
 $("#save-btn").click(function() {        

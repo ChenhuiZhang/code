@@ -12,22 +12,35 @@
 	<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
+	<h1>Demo of VLC mozilla plugin - Example 1</h1>
+
+	<!---
+	<object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" codebase="http://download.videolan.org/pub/videolan/vlc/last/win32/axvlc.cab" id="vlc">
+	<embed type="application/x-vlc-plugin"
+        	name="video1"
+        	autoplay="yes" loop="yes" width="400" height="300"
+        	target="rtsp://root:pass@192.168.77.140/axis-media/media.amp?videocodec=h264" />
+	</object>
+	<br />
+  	<a href="javascript:;" onclick='document.video1.play()'>Play video1</a>
+  	<a href="javascript:;" onclick='document.video1.pause()'>Pause video1</a>
+  	<a href="javascript:;" onclick='document.video1.stop()'>Stop video1</a>
+  	<a href="javascript:;" onclick='document.video1.fullscreen()'>Fullscreen</a>
+	-->
+
+
+
+	<object classid="clsid:9BE31822-FDAD-461B-AD51-BE1D1C159921" codebase="http://downloads.videolan.org/pub/videolan/vlc/latest/win32/axvlc.cab" width="400" height="300" id="vlc" events="True"> 
+        <param name="Src" value="rtsp://root:pass@192.168.77.140/axis-media/media.amp?videocodec=h265"></param> 
+        <param name="ShowDisplay" value="True" ></param> 
+        <param name="AutoLoop" value="no"></param> 
+        <param name="AutoPlay" value="yes"></param> 
+        <embed type="application/x-google-vlc-plugin" name="vlcfirefox" autoplay="yes" loop="no" width="400" height="300" target="http://192.168.2.16:8089/webplayer/mediaResources/all/video/test.mpg"></embed> 
+    	</object> 
 	<div class="page-header">
 		<h2>Hello world</h2>
 	</div>
 	<div>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>List</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for ip, model in item_list %}
-					<tr><td><a href="../device/?ip={{ ip }}" onclick="return devOpen()">{{ ip }}</a></td><td>{{ model }}</td></tr>
-				{% endfor %}
-			</tbody>
-		</table>
 	</div>
 	<p>
 	<button type="button" class="btn btn-lg btn-primary" onclick="onRefresh()">Refresh</button>
