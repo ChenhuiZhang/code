@@ -12,8 +12,14 @@
 	<script src="{% static 'bootstrap/js/jquery.min.js' %}"></script>
 	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 
+	<script type="text/javascript">
+	 	function wait() {
+			alert("asdfasdfasd");
+			$("#WaitDialog").modalDialog();
+		}
+	</script>
 	<div class="page-header">
-		<h2 style="color:#00BFFF; font-family: Georgia">Hello, mbb means Modify the BootBlock parameters in Axis Camera. </h2>
+		<h2 style="color:#00BFFF; font-family: Georgia">Hello, Gabb means GUI for the Axis BootBlock tool. </h2>
 		<h4 style="font-style:italic"> --- This require the Axis cameras's chip higher than artpec-5!</h4>
 	</div>
 	<div>
@@ -25,10 +31,16 @@
 			</thead>
 			<tbody>
 				{% for ip, model, mac in item_list %}
-				<tr><td><a href="/device/?ip={{ ip }}" onclick="return devOpen()">{{ ip }}</a></td><td>{{ model }}</td><td>{{ mac }}</td></tr>
+				<tr id="dev"><td><a href="/device/?ip={{ ip }}" onclick="wait()">{{ ip }}</a></td><td>{{ model }}</td><td>{{ mac }}</td></tr>
 				{% endfor %}
 			</tbody>
 		</table>
+	</div>
+	<div id="WaitDialog" class="hidden" style="text-align: center">
+		<img  src="css/images/loading_black.gif" />
+		<div style="margin-top: 10px; color: white">
+			<b>Please wait</b>
+		</div>
 	</div>
 	<p>
 	<button type="button" class="btn btn-lg btn-primary" onclick="onRefresh()">Refresh</button>

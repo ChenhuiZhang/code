@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.shortcuts import render
 import paramiko
+import socket
 import os
 import time
 import re
@@ -27,15 +28,35 @@ def device(request):
         bb_list = [];
 
 
+        """
         url = 'http://' + request.GET['ip'] + '/axis-cgi/admin/param.cgi?action=update&Network.SSH.Enabled=yes'
         r = requests.get(url, auth=HTTPDigestAuth('root', 'pass'))
         print r.status_code
 
         time.sleep(5)
+        """
 
-        ssh = paramiko.SSHClient()
-        ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(request.GET['ip'], 22, "root", "pass")
+        try:
+            ssh = paramiko.SSHClient()
+            ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            ssh.connect(request.GET['ip'], 22, "root", "pass")
+        except paramiko.ssh_exception.BadHostKeyException:
+            print "BadHostKeyException"
+        except paramiko.ssh_exception.AuthenticationException:
+            print "AuthenticationException"
+        except paramiko.ssh_exception.SSHException:
+            print "SSHException"
+        except socket.error as e:
+            print "Socket error({0}): {1}".format(e.errno, e.strerror)
+
+            url = 'http://' + request.GET['ip'] + '/axis-cgi/admin/param.cgi?action=update&Network.SSH.Enabled=yes'
+            r = requests.get(url, auth=HTTPDigestAuth('root', 'pass'))
+            print r.status_code
+
+            time.sleep(5)
+
+            ssh.connect(request.GET['ip'], 22, "root", "pass")
+
         stdin, stdout, stderr = ssh.exec_command("bootblocktool -l")
         rsp_list = stdout.readlines()
         ssh.close()
