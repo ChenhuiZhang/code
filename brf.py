@@ -5,12 +5,12 @@ import re
 import os
 import sys
 
-mkvInfoList = []
-mkvLinkList = []
+MKV_INFO_LIST = []
+MKV_LINK_LIST = []
 
 def xxxx(dirinfo):
     if re.search("mkv$", dirinfo):
-        mkvInfoList.append(dirinfo)
+        MKV_INFO_LIST.append(dirinfo)
 
 def records_fetch(ftp):
 
@@ -27,11 +27,10 @@ def records_fetch(ftp):
         ftp.dir(f'{rec}/{res[0]}', xxxx)
 
         mkvs = [x for x in ftp.nlst(f'{rec}/{res[0]}') if re.search("mkv$", x)]
-        mkvLinkList.append(f'{rec}/{res[0]}/{mkvs[0]}')
+        MKV_LINK_LIST.append(f'{rec}/{res[0]}/{mkvs[0]}')
 
-    #print(mkvInfoList)
-    #print(mkvLinkList)
-
+    #print(MKV_INFO_LIST)
+    #print(MKV_LINK_LIST)
 
 def main():
     ftp = FTP(sys.argv[1])
@@ -41,8 +40,8 @@ def main():
     records_fetch(ftp)
 
     print("Retrive below record files from:", sys.argv[1])
-    for line in mkvInfoList:
-        print(mkvInfoList.index(line), ") ", line)
+    for line in MKV_INFO_LIST:
+        print(MKV_INFO_LIST.index(line), ") ", line)
     val = input("Choose the one you want to download: ")
 
     try:
@@ -50,12 +49,11 @@ def main():
     except ValueError:
         print("Input not valid!")
 
-    path = mkvLinkList[num]
+    path = MKV_LINK_LIST[num]
 
     ftp.retrbinary(f'RETR {path}', open(os.path.basename(path), 'wb').write)
 
     print("Done")
-
 
 if __name__ == "__main__":
     main()
